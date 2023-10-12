@@ -1,24 +1,24 @@
-function calcTotalMatcheWinsByYear(matches) {
-  let totalMatcheWinsByYear = {};
+function calcTotalMatchesWinsByYear(matches) {
+  let totalMatchesWinsByYear = {};
 
   matches.forEach((match) => {
     if (
-      totalMatcheWinsByYear[match.season] &&
-      totalMatcheWinsByYear[match.season][match.winner]
+      totalMatchesWinsByYear[match.season] &&
+      totalMatchesWinsByYear[match.season][match.winner]
     ) {
-      totalMatcheWinsByYear[match.season][match.winner]++;
+      totalMatchesWinsByYear[match.season][match.winner]++;
     } else if (
-      totalMatcheWinsByYear[match.season] &&
-      !totalMatcheWinsByYear[match.season][match.winner]
+      totalMatchesWinsByYear[match.season] &&
+      !totalMatchesWinsByYear[match.season][match.winner]
     ) {
-      totalMatcheWinsByYear[match.season][match.winner] = 1;
+      totalMatchesWinsByYear[match.season][match.winner] = 1;
     } else {
-      totalMatcheWinsByYear[match.season] = {};
-      totalMatcheWinsByYear[match.season][match.winner] = 1;
+      totalMatchesWinsByYear[match.season] = {};
+      totalMatchesWinsByYear[match.season][match.winner] = 1;
     }
   });
 
-  return totalMatcheWinsByYear;
+  return totalMatchesWinsByYear;
 }
 
-module.exports = calcTotalMatcheWinsByYear;
+module.exports = calcTotalMatchesWinsByYear;
