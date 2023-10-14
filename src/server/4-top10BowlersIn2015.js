@@ -1,10 +1,16 @@
-function calcTop10BowlersIn2015(deliveries, allMatchesId2015) {
+function calcTop10BowlersIn2015(deliveries, matches) {
+  let matchesID = [];
+  matches.forEach((match) => {
+    if (match.season == 2015) {
+      matchesID.push(match.id);
+    }
+  });
   // Initiate Variable for hold Bowler's Data
   const bowlerData = {};
 
   // Loop through each delivery
   deliveries.forEach((eachDelivery) => {
-    allMatchesId2015.forEach((id) => {
+    matchesID.forEach((id) => {
       if (eachDelivery.match_id == id) {
         // Logic for retrieve require data of Bowler
         if (bowlerData[eachDelivery.bowler]) {
