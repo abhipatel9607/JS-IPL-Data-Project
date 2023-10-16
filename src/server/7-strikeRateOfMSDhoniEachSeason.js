@@ -17,20 +17,12 @@ function getStrikeRateOfMSDhoniEachSeason(matches, deliveries) {
           entry.batsman_runs
         );
         // calculate total legal ball
-        if (
-          !(
-            Number(entry.wide_runs) ||
-            Number(entry.noball_runs) ||
-            Number(entry.bye_runs) ||
-            Number(entry.legbye_runs)
-          )
-        ) {
+        if (!Number(entry.wide_runs)) {
           strikeRateByYear[match.season].totalBallPlayed++;
         }
       }
     });
   });
-  //   console.log(strikeRateByYear);
 
   //   loop through all years strikeRateByYear which we just extract
   for (const year in strikeRateByYear) {
@@ -45,4 +37,5 @@ function getStrikeRateOfMSDhoniEachSeason(matches, deliveries) {
   }
   return strikeRateByYear;
 }
+
 module.exports = getStrikeRateOfMSDhoniEachSeason;

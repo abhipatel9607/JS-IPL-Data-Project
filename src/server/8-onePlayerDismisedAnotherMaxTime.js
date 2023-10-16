@@ -1,41 +1,34 @@
 function getOnePlayerDismissedAnotherMaxTime(deliveries) {
-  // Initiate Variable for hold dismissed Batman, Bowler and count Data
-  let dismissedData = {};
-  //   loop through deliveries and store dismissed data for each batsman
-  deliveries.forEach((entry) => {
-    if (
-      dismissedData[entry.player_dismissed] &&
-      dismissedData[entry.player_dismissed][entry.bowler]
-    ) {
-      dismissedData[entry.player_dismissed][entry.bowler]++;
-    } else if (
-      dismissedData[entry.player_dismissed] &&
-      !dismissedData[entry.player_dismissed][entry.bowler]
-    ) {
-      dismissedData[entry.player_dismissed][entry.bowler] = 1;
-    } else if (!dismissedData[entry.player_dismissed]) {
-      dismissedData[entry.player_dismissed] = {};
-      dismissedData[entry.player_dismissed][entry.bowler] = 1;
+  // Initialize an array to store dismiss entries
+  const dismissData = [];
+
+  // Loop through deliveries and create dismiss entries
+  deliveries.forEach((delivery) => {
+    const batsman = delivery.player_dismissed;
+    const bowler = delivery.bowler;
+
+    if (batsman && bowler) {
+      const dismissEntry = dismissData.find(
+        (entry) => entry.batsman === batsman && entry.bowler === bowler
+      );
+      if (dismissEntry) {
+        dismissEntry.count++;
+      } else {
+        dismissData.push({ batsman, bowler, count: 1 });
+      }
     }
   });
 
-  //   initialize a Variable to hold our final Max times dismissed a player by another player data
-  let playerDismissedAnotherPlayerMaxTimeData = {};
-  let maxCount = 0;
-  //   logic for extract require data
-  for (const [batsman, bowlerObj] of Object.entries(dismissedData)) {
-    for (const [bowler, outCount] of Object.entries(bowlerObj)) {
-      if (batsman && outCount > maxCount) {
-        maxCount = outCount;
-        playerDismissedAnotherPlayerMaxTimeData = {
-          player_dismissed: batsman,
-          bowler_name: bowler,
-          count: outCount,
-        };
-      }
-    }
+  // Sort dismiss entries based on count(descending order)
+  dismissData.sort((a, b) => b.count - a.count);
+  let maxOutCount = dismissData[0].count
+  let maxDismissData = [];
+  for (let i = 0; i < dismissData.length; i++) {
+    if (dismissData[i].count != maxOutCount) break;
+    maxDismissData.push(dismissData[i]);
   }
-  return playerDismissedAnotherPlayerMaxTimeData;
+  return maxDismissData;
+
 }
 
 module.exports = getOnePlayerDismissedAnotherMaxTime;

@@ -1,4 +1,4 @@
-function calcTotalMatchesWinsByYear(matches) {
+function calcMatchesWonPerTeamPerYear(matches) {
   let totalMatchesWinsByYear = {};
 
   matches.forEach((match) => {
@@ -21,4 +21,4 @@ function calcTotalMatchesWinsByYear(matches) {
   return totalMatchesWinsByYear;
 }
 
-module.exports = calcTotalMatchesWinsByYear;
+module.exports = calcMatchesWonPerTeamPerYear;
