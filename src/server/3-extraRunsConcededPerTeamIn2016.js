@@ -6,7 +6,7 @@ function getExtraRunConcedePerTeamIn2016(deliveries, matches) {
       // Logic for extra run conceded per team in 2016
       if (
         delivery.match_id == match.id &&
-        match.season == "2016" &&
+        match.season == '2016' &&
         delivery.extra_runs != 0
       ) {
         let bowlTeam = delivery.bowling_team;
@@ -22,6 +22,5 @@ function getExtraRunConcedePerTeamIn2016(deliveries, matches) {
   });
   return extraRunsConcededPerTeam;
 }
-
 
 module.exports = getExtraRunConcedePerTeamIn2016;

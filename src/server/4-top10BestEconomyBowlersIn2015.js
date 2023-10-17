@@ -5,10 +5,12 @@ function getTop10BestEconomyBowlersIn2015(deliveries, matches) {
   // Iterate through deliveries and matches directly
   deliveries.forEach((delivery) => {
     const match = matches.find((match) => match.id === delivery.match_id);
-    if (match && match.season === "2015" && delivery.is_super_over === "0") {
+    if (match && match.season === '2015' && delivery.is_super_over === '0') {
       // Logic for retrieving required data for bowlers
       if (bowlerData[delivery.bowler]) {
-        bowlerData[delivery.bowler].totalRunConceded += Number(delivery.total_runs);
+        bowlerData[delivery.bowler].totalRunConceded += Number(
+          delivery.total_runs,
+        );
       } else {
         bowlerData[delivery.bowler] = {
           totalRunConceded: Number(delivery.total_runs),

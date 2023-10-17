@@ -5,7 +5,7 @@ function getStrikeRateOfMSDhoniEachSeason(matches, deliveries) {
   matches.forEach((match) => {
     deliveries.forEach((entry) => {
       //  Logic to retrieve total run and played ball each year
-      if (match.id == entry.match_id && entry.batsman == "MS Dhoni") {
+      if (match.id == entry.match_id && entry.batsman == 'MS Dhoni') {
         if (!strikeRateByYear[match.season]) {
           strikeRateByYear[match.season] = {
             totalRunScored: Number(0),
@@ -14,7 +14,7 @@ function getStrikeRateOfMSDhoniEachSeason(matches, deliveries) {
         }
         // calculate total runs
         strikeRateByYear[match.season].totalRunScored += Number(
-          entry.batsman_runs
+          entry.batsman_runs,
         );
         // calculate total legal ball
         if (!Number(entry.wide_runs)) {

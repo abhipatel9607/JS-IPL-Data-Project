@@ -5,18 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
-    "lint-staged": {
-      "**/*.{js,jsx,json}": [
-        "eslint . --fix",
-        "prettier --write ."
-      ]
-    }
+    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "eslint . --fix",
+      "prettier --write ."
+    ]
   },
   "repository": {
     "type": "git",

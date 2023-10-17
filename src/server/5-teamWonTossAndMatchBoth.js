@@ -12,5 +12,4 @@ function getTeamWonTossAndMatchBoth(matches) {
   return teamWonTossAndMatchBoth;
 }
 
-
 module.exports = getTeamWonTossAndMatchBoth;
