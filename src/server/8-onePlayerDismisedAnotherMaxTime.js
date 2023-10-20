@@ -1,33 +1,42 @@
-function getOnePlayerDismissedAnotherMaxTime(deliveries) {
-  // Initialize an array to store dismiss entries
-  const dismissData = [];
+function getPlayerWithMaxDismissalsByBowler(deliveries) {
+  let maxDismissalsData = {
+    maxDismissCount: 0,
+    dismissedPlayer: "",
+    bowler: "",
+  };
 
-  // Loop through deliveries and create dismiss entries
-  deliveries.forEach((delivery) => {
-    const batsman = delivery.player_dismissed;
-    const bowler = delivery.bowler;
+  // eslint-disable-next-line no-unused-vars
+  let dismissalsData = deliveries.reduce((acc, delivery) => {
+    if (delivery.player_dismissed) {
+      const dismissedPlayer = delivery.player_dismissed;
+      const bowler = delivery.bowler;
 
-    if (batsman && bowler) {
-      const dismissEntry = dismissData.find(
-        (entry) => entry.batsman === batsman && entry.bowler === bowler,
-      );
-      if (dismissEntry) {
-        dismissEntry.count++;
+      if (acc[dismissedPlayer] && acc[dismissedPlayer][bowler]) {
+        acc[dismissedPlayer][bowler]++
+      } else if (acc[dismissedPlayer] && !acc[dismissedPlayer][bowler]) {
+        acc[dismissedPlayer][bowler] = 1
       } else {
-        dismissData.push({ batsman, bowler, count: 1 });
+        acc[dismissedPlayer] = {
+          [bowler]: 1,
+        }
+      }
+
+      const dismissalCount = acc[dismissedPlayer][bowler]
+
+      if (dismissalCount > maxDismissalsData.maxDismissCount) {
+        maxDismissalsData = {
+          maxDismissCount: dismissalCount,
+          dismissedPlayer: dismissedPlayer,
+          bowler: { [bowler]: dismissalCount },
+        };
+      } else if (dismissalCount == maxDismissalsData.maxDismissCount) {
+        maxDismissalsData.bowler[bowler] = dismissalCount;
       }
     }
-  });
+    return acc;
+  }, {});
 
-  // Sort dismiss entries based on count(descending order)
-  dismissData.sort((a, b) => b.count - a.count);
-  let maxOutCount = dismissData[0].count;
-  let maxDismissData = [];
-  for (let i = 0; i < dismissData.length; i++) {
-    if (dismissData[i].count != maxOutCount) break;
-    maxDismissData.push(dismissData[i]);
-  }
-  return maxDismissData;
+  return maxDismissalsData;
 }
 
-module.exports = getOnePlayerDismissedAnotherMaxTime;
+module.exports = getPlayerWithMaxDismissalsByBowler;

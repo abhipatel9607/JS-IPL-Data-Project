@@ -1,26 +1,27 @@
-function getExtraRunConcedePerTeamIn2016(deliveries, matches) {
-  let extraRunsConcededPerTeam = {};
-  // loop over each deliveries and Matches played in 2016
-  deliveries.forEach((delivery) => {
-    matches.forEach((match) => {
-      // Logic for extra run conceded per team in 2016
-      if (
-        delivery.match_id == match.id &&
-        match.season == '2016' &&
-        delivery.extra_runs != 0
-      ) {
-        let bowlTeam = delivery.bowling_team;
-        let extraRunConceded = delivery.extra_runs;
+function getExtraRunConcedePerTeamIn2016(matches, deliveries) {
 
-        if (extraRunsConcededPerTeam[bowlTeam]) {
-          extraRunsConcededPerTeam[bowlTeam] += parseInt(extraRunConceded);
-        } else {
-          extraRunsConcededPerTeam[bowlTeam] = parseInt(extraRunConceded);
-        }
+  let playedMatchesIn2016 = matches.reduce((acc, match) => {
+    if (match.season == "2016") {
+      if (!acc[match.id]) {
+        acc[match.id] = 1
       }
-    });
-  });
-  return extraRunsConcededPerTeam;
+    }
+    return acc
+  }, {})
+
+  let extraRunConcedePerTeamIn2016 = {}
+
+  deliveries.forEach((delivery) => {
+    if (playedMatchesIn2016[delivery.match_id]) {
+      if (extraRunConcedePerTeamIn2016[delivery.bowling_team]) {
+        extraRunConcedePerTeamIn2016[delivery.bowling_team] += Number(delivery.extra_runs)
+      } else {
+        extraRunConcedePerTeamIn2016[delivery.bowling_team] = Number(delivery.extra_runs)
+      }
+    }
+  })
+
+  return extraRunConcedePerTeamIn2016
 }
 
 module.exports = getExtraRunConcedePerTeamIn2016;

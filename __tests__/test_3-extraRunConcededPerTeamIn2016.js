@@ -9,7 +9,7 @@ test('extra run conceded per team', () => {
       winner: 'KKR',
     },
     {
-      id: '2',
+      id: '1',
       season: '2016',
       winner: 'MI',
     },
@@ -50,8 +50,13 @@ test('extra run conceded per team', () => {
     },
     {
       id: '10',
-      season: '2015',
-      winner: 'RCB',
+      season: '2016',
+      winner: 'MI',
+    },
+    {
+      id: '11',
+      season: '2016',
+      winner: 'KKR',
     },
   ];
 
@@ -104,13 +109,18 @@ test('extra run conceded per team', () => {
     {
       match_id: '10',
       extra_runs: 1,
-      bowling_team: 'RCB',
+      bowling_team: 'MI',
+    },
+    {
+      match_id: '11',
+      extra_runs: 1,
+      bowling_team: 'KKR',
     },
   ];
 
-  const resultData = { KKR: 2, RR: 1, RCB: 2 };
+  const resultData = { KKR: 3, MI: 1, RR: 1, RCB: 2 }
 
   expect(
-    calExtraRunConcededPerTeam(sampleDataDeliveries, sampleDataMatches),
+    calExtraRunConcededPerTeam(sampleDataMatches, sampleDataDeliveries),
   ).toEqual(resultData);
 });

@@ -1,15 +1,15 @@
 function getTeamWonTossAndMatchBoth(matches) {
-  let teamWonTossAndMatchBoth = {};
-  matches.forEach((match) => {
+  const teamWonTossAndMatchBoth = matches.reduce((acc, match) => {
     if (match.toss_winner == match.winner) {
-      if (teamWonTossAndMatchBoth[match.winner]) {
-        teamWonTossAndMatchBoth[match.winner]++;
+      if (acc[match.winner]) {
+        acc[match.winner]++
       } else {
-        teamWonTossAndMatchBoth[match.winner] = 1;
+        acc[match.winner] = 1
       }
     }
-  });
-  return teamWonTossAndMatchBoth;
+    return acc
+  }, {})
+  return teamWonTossAndMatchBoth
 }
 
 module.exports = getTeamWonTossAndMatchBoth;

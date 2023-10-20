@@ -67,11 +67,11 @@ test('played_matches_per_year', () => {
   ];
 
   const resultData = {
-    2008: { Chennai: 1 },
-    2009: { Chandigarh: 1, Hyderabad: 1, Mumbai: 2 },
-    2010: { Chandigarh: 1, Hyderabad: 1, Chennai: 1 },
-    2011: { Hyderabad: 1, Mumbai: 1 },
-    2013: { Chandigarh: 1, Chennai: 1 },
-  };
+    '2008': { Chennai: 1 },
+    '2009': { Hyderabad: 1, Mumbai: 2, Chandigarh: 1 },
+    '2010': { Chandigarh: 1, Chennai: 1, Hyderabad: 1 },
+    '2011': { Hyderabad: 1, Mumbai: 1 },
+    '2013': { Chennai: 1, Chandigarh: 1 }
+  }
   expect(calcTotalMatchesWinsByYear(sampleData)).toEqual(resultData);
 });

@@ -1,24 +1,20 @@
 function calcMatchesWonPerTeamPerYear(matches) {
-  let totalMatchesWinsByYear = {};
 
-  matches.forEach((match) => {
-    if (
-      totalMatchesWinsByYear[match.season] &&
-      totalMatchesWinsByYear[match.season][match.winner]
-    ) {
-      totalMatchesWinsByYear[match.season][match.winner]++;
-    } else if (
-      totalMatchesWinsByYear[match.season] &&
-      !totalMatchesWinsByYear[match.season][match.winner]
-    ) {
-      totalMatchesWinsByYear[match.season][match.winner] = 1;
+  const matchesWonPerTeamPerYear = matches.reduce((acc, match) => {
+
+    if (acc[match.season] && acc[match.season][match.winner]) {
+      acc[match.season][match.winner]++
+    } else if (acc[match.season] && !(acc[match.season][match.winner])) {
+      acc[match.season][match.winner] = 1
     } else {
-      totalMatchesWinsByYear[match.season] = {};
-      totalMatchesWinsByYear[match.season][match.winner] = 1;
+      acc[match.season] = {}
+      acc[match.season][match.winner] = 1
     }
-  });
 
-  return totalMatchesWinsByYear;
+    return acc
+  }, {})
+
+  return matchesWonPerTeamPerYear
 }
 
 module.exports = calcMatchesWonPerTeamPerYear;

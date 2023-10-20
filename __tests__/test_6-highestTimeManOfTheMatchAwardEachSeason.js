@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const calcHighestTimeManOfTheMatchAwardEachSeason = require('../src/server/6-highestTimeManOfTheMatchAwardEachSeason');
+const getHighestTimeManOfTheMatchAwardEachSeason = require('../src/server/6-highestTimeManOfTheMatchAwardEachSeason');
 
 test('player who won the highest number of match awards', () => {
   const sampleData = [
@@ -39,14 +39,20 @@ test('player who won the highest number of match awards', () => {
       winner: 'MI',
       player_of_match: 'Rashid Khan',
     },
+    {
+      id: '7',
+      season: '2011',
+      winner: 'MI',
+      player_of_match: 'Sachin Tendulkar',
+    },
   ];
   const resultData = {
-    2008: { 'V Kohli': 1 },
-    2009: { Rituraj: 1 },
-    2010: { 'SPD Smith': 1, Maxwell: 1 },
-    2011: { 'Rashid Khan': 2 },
-  };
-  expect(calcHighestTimeManOfTheMatchAwardEachSeason(sampleData)).toEqual(
+    '2008': { 'V Kohli': 1 },
+    '2009': { Rituraj: 1 },
+    '2010': { 'SPD Smith': 1, Maxwell: 1 },
+    '2011': { 'Rashid Khan': 2 }
+  }
+  expect(getHighestTimeManOfTheMatchAwardEachSeason(sampleData)).toEqual(
     resultData,
   );
 });

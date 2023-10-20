@@ -1,15 +1,13 @@
-function calcTotalMatches(matches) {
-  let totalMatchesInYear = {};
-
-  matches.forEach((match) => {
-    if (totalMatchesInYear[match.season]) {
-      totalMatchesInYear[match.season]++;
+function getMatchesPerYear(matches) {
+  let matchesPerYear = matches.reduce((acc, match) => {
+    if (acc[match.season]) {
+      acc[match.season]++
     } else {
-      totalMatchesInYear[match.season] = 1;
+      acc[match.season] = 1
     }
-  });
-
-  return totalMatchesInYear;
+    return acc
+  }, {})
+  return matchesPerYear
 }
 
-module.exports = calcTotalMatches;
+module.exports = getMatchesPerYear

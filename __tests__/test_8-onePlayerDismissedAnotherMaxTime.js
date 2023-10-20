@@ -53,10 +53,31 @@ test('highest dismissals', () => {
       wide_runs: 0,
       noball_runs: 0,
     },
+    {
+      match_id: 6,
+      extra_runs: 0,
+      bowling_team: 'MI',
+      bowler: 'Anil kumble',
+      player_dismissed: 'V Kohli',
+      total_runs: 0,
+      wide_runs: 0,
+      noball_runs: 0,
+    },
+    {
+      match_id: 7,
+      extra_runs: 0,
+      bowling_team: 'MI',
+      bowler: 'Hardik pandya',
+      player_dismissed: '',
+      total_runs: 0,
+      wide_runs: 0,
+      noball_runs: 0,
+    },
   ];
-  const resultData = [
-    { batsman: 'V Kohli', bowler: 'Malinga', count: 2 },
-    { batsman: 'Rituraj', bowler: 'Zaheer Khan', count: 2 },
-  ];
+  const resultData = {
+    maxDismissCount: 2,
+    dismissedPlayer: 'V Kohli',
+    bowler: { Malinga: 2, 'Zaheer Khan': 2 }
+  }
   expect(findHighestDismissals(sampleDataDeliveries)).toEqual(resultData);
 });

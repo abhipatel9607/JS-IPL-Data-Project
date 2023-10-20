@@ -1,44 +1,35 @@
-function calcHighestTimeManOfTheMatchAwardEachSeason(matches) {
-  // Initiate a variable which will hold all Seasons and Total played Matches
-  let allYearsAndPlayedMatches = {};
-  matches.forEach((match) => {
-    if (allYearsAndPlayedMatches[match.season]) {
-      allYearsAndPlayedMatches[match.season]++;
+function getHighestTimeManOfTheMatchAwardEachSeason(matches) {
+
+  let playersManOfTheMatchCount = matches.reduce((acc, match) => {
+    if (acc[match.season] && acc[match.season][match.player_of_match]) {
+      acc[match.season][match.player_of_match]++
+    } else if (acc[match.season] && !acc[match.season][match.player_of_match]) {
+      acc[match.season][match.player_of_match] = 1
     } else {
-      allYearsAndPlayedMatches[match.season] = 1;
+      acc[match.season] = {
+        [match.player_of_match]: 1,
+        maxCount: 1,
+        player: {}
+      }
     }
-  });
-  //   Initiate a variable to hold all unique Seasons
-  let seasons = Object.keys(allYearsAndPlayedMatches);
-  let highestTimeManOfTheMatchAwardEachSeason = {};
-  // calculate how many time any player won Man of the match by Season
-  seasons.forEach((season) => {
-    let manOfMatchWinnerAndCount = {};
-    matches.forEach((match) => {
-      if (season == match.season) {
-        if (manOfMatchWinnerAndCount[match.player_of_match]) {
-          manOfMatchWinnerAndCount[match.player_of_match]++;
-        } else {
-          manOfMatchWinnerAndCount[match.player_of_match] = 1;
-        }
-      }
-    });
-    // Calculate which Player won max Times Man of the Match
-    let max = 0;
-    let maxPlayer = {};
-    for (const key in manOfMatchWinnerAndCount) {
-      if (manOfMatchWinnerAndCount[key] > max) {
-        max = manOfMatchWinnerAndCount[key];
-        maxPlayer[key] = manOfMatchWinnerAndCount[key];
-      } else if (manOfMatchWinnerAndCount[key] == max) {
-        maxPlayer[key] = manOfMatchWinnerAndCount[key];
-      }
+    // Logic for trace MaxCount Player
+    if (acc[match.season][match.player_of_match] > acc[match.season].maxCount) {
+      acc[match.season].maxCount = acc[match.season][match.player_of_match]
+      acc[match.season]["player"] = {}
+      acc[match.season]["player"][match.player_of_match] = acc[match.season].maxCount
+    } else if (acc[match.season][match.player_of_match] == acc[match.season].maxCount) {
+      acc[match.season]["player"][match.player_of_match] = acc[match.season].maxCount
     }
 
-    // assign final result to highestTimeManOfTheMatchAwardEachSeason
-    highestTimeManOfTheMatchAwardEachSeason[season] = maxPlayer;
-  });
-  return highestTimeManOfTheMatchAwardEachSeason;
+    return acc
+  }, {})
+
+  const highestTimeManOfTheMatchAwardEachSeason = {}
+  for (const season in playersManOfTheMatchCount) {
+    highestTimeManOfTheMatchAwardEachSeason[season] = playersManOfTheMatchCount[season]["player"]
+  }
+
+  return (highestTimeManOfTheMatchAwardEachSeason);
 }
 
-module.exports = calcHighestTimeManOfTheMatchAwardEachSeason;
+module.exports = getHighestTimeManOfTheMatchAwardEachSeason;

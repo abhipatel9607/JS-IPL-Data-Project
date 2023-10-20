@@ -1,42 +1,41 @@
 function getBestBowlerEconomyInSuperOver(deliveries) {
-  // initiate a variable which hold only SuperOver Deliveries
-  let superOversDeliveries = deliveries.filter((entry) => {
-    return entry.is_super_over == '1';
-  });
-  // initiate a variable which hold only SuperOver Bowlers data
-  let bowlerData = {};
-  //   loop over all superOver deliveries
-  superOversDeliveries.forEach((delivery) => {
-    if (bowlerData[delivery.bowler]) {
-      bowlerData[delivery.bowler]['totalRuns'] += Number(delivery.total_runs);
-      bowlerData[delivery.bowler]['totalBalls']++;
-    } else {
-      bowlerData[delivery.bowler] = {
-        totalRuns: Number(delivery.total_runs),
-        totalBalls: 1,
-      };
+
+  const bowlerData = deliveries.reduce((acc, delivery) => {
+
+    if (delivery.is_super_over == "1") {
+      const isWide = Number(delivery.wide_runs)
+      const isNoBall = Number(delivery.noball_runs)
+      const isBye = Number(delivery.bye_runs)
+      const isLegBye = Number(delivery.legbye_runs)
+      const isPenalty = Number(delivery.penalty_runs)
+
+      if (!acc[delivery.bowler]) {
+        acc[delivery.bowler] = { totalRunConcede: 0, totalBalls: 0 }
+      }
+      if (!isWide && !isNoBall) {
+        acc[delivery.bowler].totalBalls++
+      }
+      if (!isBye && !isLegBye && !isPenalty) {
+        acc[delivery.bowler].totalRunConcede += Number(delivery.total_runs)
+      }
+
     }
-  });
-  // Calculate economy and update Variables
-  let bestEconomy = null;
-  let bestEconomyBowlers = {};
+    return acc
+  }, {})
 
+  let bestEconomy = null
+  let bestBowlerEconomyInSuperOver = {};
   for (const bowler in bowlerData) {
-    let economy =
-      (bowlerData[bowler].totalRuns / bowlerData[bowler].totalBalls) * 6;
-    bowlerData[bowler] = economy;
+    const economy = Number(((bowlerData[bowler].totalRunConcede / bowlerData[bowler].totalBalls) * 6).toFixed(2))
 
-    // Find Best Economy Logic
-    if (bestEconomy === null || economy < bestEconomy) {
-      bestEconomyBowlers = {};
-      bestEconomy = economy;
-      bestEconomyBowlers[bowler] = economy;
-    } else if (economy === bestEconomy) {
-      bestEconomyBowlers[bowler] = economy;
+    if (bestEconomy == null || bestEconomy > economy) {
+      bestEconomy = economy
+      bestBowlerEconomyInSuperOver = { [bowler]: economy }
+    } else if (bestEconomy == economy) {
+      bestBowlerEconomyInSuperOver[bowler] = economy
     }
   }
-
-  return bestEconomyBowlers;
+  return bestBowlerEconomyInSuperOver
 }
 
 module.exports = getBestBowlerEconomyInSuperOver;

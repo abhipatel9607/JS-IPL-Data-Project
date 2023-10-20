@@ -1,12 +1,8 @@
-[
-  {
-    "batsman": "MS Dhoni",
-    "bowler": "Z Khan",
-    "count": 7
-  },
-  {
-    "batsman": "MS Dhoni",
-    "bowler": "PP Ojha",
-    "count": 7
+{
+  "maxDismissCount": 7,
+  "dismissedPlayer": "MS Dhoni",
+  "bowler": {
+    "PP Ojha": 7,
+    "Z Khan": 7
   }
-]
+}
