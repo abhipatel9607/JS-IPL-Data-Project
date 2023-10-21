@@ -23,7 +23,7 @@ fs.createReadStream("./src/data/matches.csv", "utf-8")
     fs.createReadStream("./src/data/deliveries.csv", "utf-8")
       .pipe(csv({}))
       .on("data", data => { deliveries.push(data) })
-      .on("end", end => {
+      .on("end", () => {
 
         // 1, MatchesPerYear
         const matchesPerYear = getMatchesPerYear(matches)
