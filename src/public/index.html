@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Import HighChart -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>WebApp</title>
+  </head>
+  <body>
+    <h1>IPL-Data-Visualizations</h1>
+    <div class="main_container">
+      <div id="matchesPerYear" class="container"></div>
+      <div id="matchesWonPerTeamPerYear" class="container"></div>
+      <div id="extraRunConcededPerTeamPerYear" class="container"></div>
+      <div id="top10EconomyBowlerIn2015" class="container"></div>
+      <div id="teamWonTossAndMatchesBoth" class="container"></div>
+      <div id="highestTimeManOfTheAwardEachSeason" class="container"></div>
+      <div id="strikeRateOfPlayerEachSeason" class="container"></div>
+      <div id="onePlayerDismissedAnotherMaxTime" class="container"></div>
+      <div id="bestBowlerEconomyInSuperOver" class="container"></div>
+    </div>
+    <!--  -->
+    <script src="../server//ipl.js"></script>
+    <script src="../server/index.js"></script>
+  </body>
+</html>

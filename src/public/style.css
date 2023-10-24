@@ -1,0 +1,26 @@
+body {
+  background-color: #ddd;
+}
+
+.main_container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.container {
+  margin-bottom: 8rem;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  width: 70%;
+  margin: 5rem auto !important;
+  padding: 2rem;
+  background-color: #bbb;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
