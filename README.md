@@ -58,6 +58,16 @@ node index.js
 npm test
 ```
 
+**Data visualization**
+To access the data visualization feature, switch to the "webapp" branch using the following commands:
+
+```bash
+git checkout webapp
+npm start
+```
+
+This will launch a server on a port, allowing you to explore the data visualization feature.
+
 ## Test Cases
 
 The project includes a suite of Jest test cases to ensure the accuracy and functionality of each function.
@@ -66,6 +76,6 @@ The project includes a suite of Jest test cases to ensure the accuracy and funct
 
 The functions within this project provide JSON output that can be used to generate insightful statistics and reports regarding IPL data. The results help cricket enthusiasts, analysts, and fans gain a deeper understanding of the IPL seasons from 2008 to 2016.
 
-## Summry
+## Summary
 
 This IPL Data Analysis project serves as a valuable resource for extracting meaningful insights and statistics from one of the most popular cricket tournaments in the world. Whether you're interested in team performance, player achievements, or match outcomes, this project has you covered.
