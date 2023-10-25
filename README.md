@@ -52,21 +52,19 @@ npm install
 node index.js
 ```
 
+**Data visualization feature**
+
+```bash
+npm start
+```
+
+This will launch a server on a port, allowing you to explore the data visualization feature on that port.
+
 **Run Test Cases**
 
 ```bash
 npm test
 ```
-
-**Data visualization**
-To access the data visualization feature, switch to the "webapp" branch using the following commands:
-
-```bash
-git checkout webapp
-npm start
-```
-
-This will launch a server on a port, allowing you to explore the data visualization feature.
 
 ## Test Cases
 
